@@ -117,6 +117,7 @@ class Secure:
 
 
 
+
         # static methods for the shift generation
 
         rest = 263                                                              # 979999998077

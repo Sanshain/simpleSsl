@@ -155,6 +155,7 @@ class Server: # (object)
         # меняется только по нажатии выйти со всех устройств
         """
 
+
         skey, pkey, resp_time = self.connections[conn_id]
         shft = Secure.Private.post_statement(open_shift, skey)
         psw = self.secure.ipost_statement(open_psw, pkey)
