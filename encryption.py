@@ -11,7 +11,7 @@
 
 from itertools import chain, cycle
 import base64
-
+import random
 
 sh_multiplier = 17      # 10
 
@@ -83,13 +83,41 @@ class Secure:
 
     class Private(object):
 
-        # static methods for password generation:
+        # instance methods for password generation:
 
         def __init__ (self, rest = 979999998077): self.rest = rest              # 67
         istatement = lambda self, x: (sh_multiplier**x) % self.rest
         ipost_statement = lambda self, a, b: (a**b) % self.rest
 
-        # instance methods for the shift generation
+        @staticmethod
+        def i3_statement(lvls = None):
+
+            lvls = [random.randint(0, 199) for i in range(3)]
+            istatement = lambda x: (65**x) % 839
+            o_keys = tuple(istatement(lvl) for lvl in lvls)
+            rez = ''.join([str(lv).rjust(3,'0') for lv in o_keys])
+            return rez, lvls
+
+        @staticmethod
+        def i3post_statement(o_kyes, skeys):
+
+            ipost_statement = lambda ml, lv: (ml**lv) % 839
+            o_kyes = [int(o_kyes[i:i + 3]) for i in range(0, len(o_kyes), 3)]
+            keys = [ipost_statement(o_kyes[i],skey) for i, skey in enumerate(skeys)]
+            rez = ''.join([str(k).rjust(3,'0') for k in keys])
+            return rez
+
+        # for make calculats the faster do separated operation for three-digit keys.
+        # Need repartition for some code in Ssl realization
+
+
+##        istatement = lambda self, lvl: Secure.Private.i3_statement()
+##        ipost_statement = lambda self, ml, lvl: Secure.Private.i3post_statement(ml, lvl)
+
+
+
+
+        # static methods for the shift generation
 
         rest = 263                                                              # 979999998077
         gt_multiplier = 10                                                      # 17
