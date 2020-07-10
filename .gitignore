@@ -1,0 +1,10 @@
+*.pyc
+*.prof
+__pychache__/
+__venv/
+
+*.jpeg
+*.jpg
+*.png
+
+.idea/
