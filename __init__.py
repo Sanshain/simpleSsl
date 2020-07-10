@@ -145,7 +145,15 @@ class Server: # (object)
         return self.token
 
 
-    def token_auth(self, conn_id, token, open_shift, open_psw):
+    def token_auth(self, conn_id, token, open_shift, open_psw, username=''):
+        """
+        Добавить username в реализацию
+
+        # в идеале еще добавить проверку на срок. И если истек, то на основе refresh-токена сгенерировать новый.
+        # соответственно вести рефреш-токен для каждой учетки => 18 или 21-значный (сгенерирован 1 раз. при регистрации)
+        # для него реализовать такое же шифрование с соответствующим его длине паролем
+        # меняется только по нажатии выйти со всех устройств
+        """
 
         skey, pkey, resp_time = self.connections[conn_id]
         shft = Secure.Private.post_statement(open_shift, skey)
