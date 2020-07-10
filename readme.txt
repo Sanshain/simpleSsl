@@ -1,1 +1,1 @@
-Python asymmetrical encryption
+Asymmetrical encryption relization on python and simple ssl emulation
